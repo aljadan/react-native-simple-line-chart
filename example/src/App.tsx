@@ -38,6 +38,7 @@ const generateData = ({
 };
 
 export default function App() {
+  const [uniqueKey, setUniqueKey] = React.useState(Math.random());
   const [data, setData] = React.useState(undefined);
   const [data2, setData2] = React.useState(undefined);
   const [data3, setData3] = React.useState(undefined);
@@ -71,6 +72,7 @@ export default function App() {
     <GestureHandlerRootView style={{ flex: 1 }}>
       <View style={styles.container}>
         <Chart
+          key={uniqueKey}
           data={data}
           data2={data2}
           data3={data3}
@@ -294,12 +296,19 @@ export default function App() {
             value={isAreaChart}
           />
         </View>
-        <View style={{ marginHorizontal: 5, marginTop: 10 }}>
+        <View style={{ marginHorizontal: 5, marginTop: 10, gap: 5 }}>
           <Button
             title="Randomize"
             color={color}
             onPress={() => {
               randomize();
+            }}
+          />
+          <Button
+            title="Reset"
+            color={color}
+            onPress={() => {
+              setUniqueKey(Math.random());
             }}
           />
         </View>
